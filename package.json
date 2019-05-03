@@ -1,0 +1,120 @@
+{
+  "name": "eRevenue",
+  "version": "0.1.0",
+  "description": "Revenue collection application",
+  "author": "Adewumi Adedeji | Mict Xplorers | 07051013383",
+  "private": true,
+  "scripts": {
+    "dev": "NODE_ENV=DEV vue-cli-service serve & sleep 5 && NODE_ENV=DEV electron app.js",
+    "serve": "vue-cli-service serve --open",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "pack": "electron-builder --dir",
+    "dist": "build electron-builder --win --x64 --ia32 --mac -c.extraMetadata.main=app.js",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "alias": {
+    "vue": "./node_modules/vue/dist/vue.esm.js"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.431.0",
+    "axios": "^0.18.0",
+    "bootstrap": "^4.3.1",
+    "cors": "^2.8.5",
+    "electron-log": "^3.0.5",
+    "electron-updater": "^4.0.6",
+    "idb": "^4.0.0",
+    "image-to-base64": "^2.0.1",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.7",
+    "print-html-element": "^0.5.1",
+    "secure-ls": "^1.2.5",
+    "v-offline": "^1.1.0",
+    "vue": "^2.6.10",
+    "vue-router": "^3.0.1",
+    "vuetify": "^1.5.5",
+    "vuex": "^3.1.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.5.0",
+    "@vue/cli-plugin-eslint": "^3.5.0",
+    "@vue/cli-service": "^3.5.0",
+    "@vue/eslint-config-prettier": "^4.0.1",
+    "babel-eslint": "^10.0.1",
+    "electron": "^4.1.1",
+    "electron-builder": "^20.39.0",
+    "electron-rebuild": "^1.8.4",
+    "eslint": "^5.8.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "material-design-icons-iconfont": "^4.0.5",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1",
+    "vue-cli-plugin-vuetify": "^0.5.0",
+    "vue-devtools": "^5.0.0-beta.1",
+    "vue-template-compiler": "^2.5.21",
+    "vuetify-loader": "^1.0.5"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "@vue/prettier"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "productName": "eRevenue",
+  "standard": {
+    "globals": [
+      "$"
+    ]
+  },
+  "build": {
+    "appId": "com.mict.revenue",
+    "productName": "eRevenue",
+    "copyright": "copyright @ 2019",
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "perMachine": true
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "https://github.com/mict-exp/erevenue.git/build"
+      }
+    ],
+    "files": [
+      "**/*",
+      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme,test,__tests__,tests,powered-test,example,examples,*.d.ts}",
+      "!**/node_modules/.bin",
+      "!**/._*",
+      "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,__pycache__,thumbs.db,.gitignore,.gitattributes,.editorconfig,.flowconfig,.yarn-metadata.json,.idea,appveyor.yml,.travis.yml,circle.yml,npm-debug.log,.nyc_output,yarn.lock,.yarn-integrity}"
+    ],
+    "asar": true,
+    "compression": "store",
+    "directories": {
+      "output": "build"
+    }
+  }
+}
