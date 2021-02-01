@@ -1,58 +1,91 @@
 {
-  "name": "eRevenue",
+  "name": "patrec",
   "version": "0.1.0",
-  "description": "Revenue collection application",
-  "author": "Adewumi Adedeji | Mict Xplorers | 07051013383",
   "private": true,
   "scripts": {
-    "dev": "NODE_ENV=DEV vue-cli-service serve & sleep 5 && NODE_ENV=DEV electron app.js",
-    "serve": "vue-cli-service serve --open",
+    "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "pack": "electron-builder --dir",
-    "dist": "build electron-builder --win --x64 --ia32 --mac -c.extraMetadata.main=app.js",
-    "postinstall": "electron-builder install-app-deps"
-  },
-  "alias": {
-    "vue": "./node_modules/vue/dist/vue.esm.js"
+    "docs": "npm run docs:serve",
+    "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
+    "now-start": "vue-cli-service serve",
+    "docs:build": "vue-cli-service docs --mode build",
+    "docs:serve": "vue-cli-service docs --mode serve",
+    "prepublish": "vue-cli-service lint && vue-cli-service docs --mode build && vue-cli-service build",
+    "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "aws-sdk": "^2.431.0",
-    "axios": "^0.18.0",
-    "bootstrap": "^4.3.1",
+    "@ckeditor/ckeditor5-build-classic": "^15.0.0",
+    "@ckeditor/ckeditor5-vue": "^1.0.1",
+    "@mdi/font": "^5.1.45",
+    "axios": "^0.19.2",
+    "bootstrap": "^4.4.1",
+    "chart.js": "^2.9.3",
+    "co": "^4.6.0",
+    "core-js": "^2.6.11",
     "cors": "^2.8.5",
-    "electron-log": "^3.0.5",
-    "electron-updater": "^4.0.6",
-    "idb": "^4.0.0",
-    "image-to-base64": "^2.0.1",
-    "jquery": "^3.3.1",
-    "popper.js": "^1.14.7",
-    "print-html-element": "^0.5.1",
-    "secure-ls": "^1.2.5",
-    "v-offline": "^1.1.0",
-    "vue": "^2.6.10",
-    "vue-router": "^3.0.1",
-    "vuetify": "^1.5.5",
-    "vuex": "^3.1.0"
+    "dayspan-vuetify": "^0.4.0",
+    "dwt": "^16.1.4",
+    "expo": "^34.0.1",
+    "fibers": "^4.0.2",
+    "file-saver": "^2.0.2",
+    "fs-web": "^1.0.1",
+    "idb": "^5.0.7",
+    "image-to-base64": "^2.1.1",
+    "jquery": "^3.5.0",
+    "jw-vue-pagination": "^1.0.3",
+    "knacss": "^7.1.3",
+    "material-design-icons-iconfont": "^5.0.1",
+    "node-sass": "^4.14.1",
+    "ping": "^0.3.0",
+    "popper.js": "^1.16.1",
+    "printd": "^1.4.1",
+    "register-service-worker": "^1.7.1",
+    "remote": "^0.2.6",
+    "sass": "^1.26.3",
+    "sass-loader": "^7.3.1",
+    "scanner": "^0.1.0",
+    "secure-ls": "^1.2.6",
+    "style-resources-loader": "^1.3.3",
+    "v-clipboard": "^2.2.3",
+    "v-form-builder": "^1.4.1-rc2",
+    "vee-validate": "^3.3.0",
+    "vue": "^2.6.11",
+    "vue-barcode": "^1.2.0",
+    "vue-booklet": "^2.3.1",
+    "vue-chartist": "^2.2.1",
+    "vue-chartjs": "^3.5.0",
+    "vue-ctk-date-time-picker": "^2.5.0",
+    "vue-html-to-paper": "^1.3.1",
+    "vue-i18n": "^8.17.3",
+    "vue-infinite-scroll": "^2.0.2",
+    "vue-picture-input": "^2.1.6",
+    "vue-print-plugin": "^1.0.2",
+    "vue-progressbar": "^0.7.5",
+    "vue-router": "^3.1.6",
+    "vue-toastr": "^2.1.2",
+    "vue2-editor": "^2.10.2",
+    "vuejs-progress-bar": "^1.2.2",
+    "vuetify": "^2.2.22",
+    "vuex": "^3.2.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.5.0",
-    "@vue/cli-plugin-eslint": "^3.5.0",
-    "@vue/cli-service": "^3.5.0",
-    "@vue/eslint-config-prettier": "^4.0.1",
-    "babel-eslint": "^10.0.1",
-    "electron": "^4.1.1",
-    "electron-builder": "^20.39.0",
-    "electron-rebuild": "^1.8.4",
-    "eslint": "^5.8.0",
+    "@vue/cli-plugin-babel": "^3.12.1",
+    "@vue/cli-plugin-eslint": "^3.12.1",
+    "@vue/cli-service": "^3.12.1",
+    "@vue/eslint-config-prettier": "^5.1.0",
+    "babel-eslint": "^10.1.0",
+    "css-loader": "^3.5.2",
+    "eslint": "^5.16.0",
+    "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-vue": "^5.0.0",
-    "material-design-icons-iconfont": "^4.0.5",
+    "prettier": "^1.19.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "vue-cli-plugin-vuetify": "^0.5.0",
     "vue-devtools": "^5.0.0-beta.1",
-    "vue-template-compiler": "^2.5.21",
-    "vuetify-loader": "^1.0.5"
+    "vue-template-compiler": "^2.6.11",
+    "vuetify-loader": "^1.4.3"
   },
   "eslintConfig": {
     "root": true,
@@ -75,46 +108,6 @@
   },
   "browserslist": [
     "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ],
-  "productName": "eRevenue",
-  "standard": {
-    "globals": [
-      "$"
-    ]
-  },
-  "build": {
-    "appId": "com.mict.revenue",
-    "productName": "eRevenue",
-    "copyright": "copyright @ 2019",
-    "win": {
-      "target": "nsis",
-      "icon": "build/icon.ico"
-    },
-    "nsis": {
-      "perMachine": true
-    },
-    "mac": {
-      "target": "dmg"
-    },
-    "publish": [
-      {
-        "provider": "generic",
-        "url": "https://github.com/mict-exp/erevenue.git/build"
-      }
-    ],
-    "files": [
-      "**/*",
-      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme,test,__tests__,tests,powered-test,example,examples,*.d.ts}",
-      "!**/node_modules/.bin",
-      "!**/._*",
-      "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,__pycache__,thumbs.db,.gitignore,.gitattributes,.editorconfig,.flowconfig,.yarn-metadata.json,.idea,appveyor.yml,.travis.yml,circle.yml,npm-debug.log,.nyc_output,yarn.lock,.yarn-integrity}"
-    ],
-    "asar": true,
-    "compression": "store",
-    "directories": {
-      "output": "build"
-    }
-  }
+    "last 2 versions"
+  ]
 }

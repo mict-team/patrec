@@ -1,4 +1,4 @@
-# hosp-rev
+# patrec
 
 ## Project setup
 ```
