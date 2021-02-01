@@ -82,8 +82,6 @@
 </template>
 
 <script>
-import { URL, LS } from "../shared/config.js";
-import { DATA, PAYMENTMETHOD } from "../shared/data.js";
 import { mapState, mapActions } from "vuex";
 export default {
   data: () => ({
@@ -127,7 +125,6 @@ export default {
           paypoint: this.hospital.paypoint,
           url: this.hospital.domain
         };
-        //console.log(JSON.stringify(postData))
 
         this.post("/auth", postData)
           .then(response => {
@@ -143,10 +140,8 @@ export default {
               this.failed = true;
               this.message = response.message;
             }
-            console.log(response);
           })
           .catch(e => {
-            //console.log(e)
             this.message = "Error occured while trying to save Paypoint detail";
             this.loadingDialog = false;
             this.failed = true;
@@ -157,7 +152,6 @@ export default {
   mounted() {
     this.checkStorage();
     this.getDomain();
-    //console.log(this.outlet)
     this.hospital.code = this.outlet.code;
     this.hospital.paypoint = this.outlet.paypoint || this.hospital.paypoint;
     this.hospital.domain = this.domain;
