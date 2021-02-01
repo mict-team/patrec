@@ -62,7 +62,7 @@
           {{ message }}
         </v-card-text>
         <v-card-actions align-right>
-          <v-btn color="primary" flat @click="failed = false">Close</v-btn>
+          <v-btn color="primary" @click="failed = false">Close</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -82,7 +82,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import { URL, LS } from "../shared/config.js";
 import { DATA, PAYMENTMETHOD } from "../shared/data.js";
 import { mapState, mapActions } from "vuex";
@@ -90,7 +89,7 @@ export default {
   data: () => ({
     drawer: null,
     paypoints: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-    hospital: { code: "", paypoint: 1, domain:'' },
+    hospital: { code: "", paypoint: 1, domain: "" },
     loadingDialog: false,
     failed: false,
     message: ""
@@ -123,29 +122,28 @@ export default {
         formData.append("code", this.hospital.code);
         formData.append("paypoint", this.hospital.paypoint);
         formData.append("url", this.hospital.domain);
-        var postData={
+        var postData = {
           code: this.hospital.code,
           paypoint: this.hospital.paypoint,
           url: this.hospital.domain
-        }
+        };
         //console.log(JSON.stringify(postData))
-        var paths=(this.hospital.domain==='')?URL: this.hospital.domain;
-        axios
-          .post(paths + "/auth", postData)
+
+        this.post("/auth", postData)
           .then(response => {
             //return server response
-            if (response.data.status > 0) {
-              this.addOutlet(response.data.response.outlet);
-              this.addpaymentMethods(response.data.response.method);
-              this.message = response.data.message;
+            if (response.status > 0) {
+              this.addOutlet(response.response.outlet);
+              this.addpaymentMethods(response.response.method);
+              this.message = response.message;
               this.loadingDialog = false;
               this.$router.push("/app-setup");
             } else {
               this.loadingDialog = false;
               this.failed = true;
-              this.message = response.data.message;
+              this.message = response.message;
             }
-            //console.log(response)
+            console.log(response);
           })
           .catch(e => {
             //console.log(e)
@@ -161,7 +159,7 @@ export default {
     this.getDomain();
     //console.log(this.outlet)
     this.hospital.code = this.outlet.code;
-    this.hospital.paypoint=this.outlet.paypoint || this.hospital.paypoint;
+    this.hospital.paypoint = this.outlet.paypoint || this.hospital.paypoint;
     this.hospital.domain = this.domain;
   }
 };

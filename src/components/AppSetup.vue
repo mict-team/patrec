@@ -2,32 +2,30 @@
   <v-app id="inspire">
     <v-content>
       <v-container fluid fill-height>
-          
         <v-layout align-center justify-center>
-            <v-flex xs12 md7>
-                <v-flex xs11 row wrap>
-                    <v-flex
-                    v-for="(method, index) in outlet.app_type"
-                    :key="index"
-                    @click="setupPaypoint(method)"
-                    >
-                        <v-card class="red thumbnail">
-                            <v-container fill-height fluid pa-2>
-                                <v-layout fill-height>
-                                    <v-flex xs12 align-end flexbox>
-                                        <span
-                                            class="headline white--text"
-                                            v-text="method.name"
-                                        ></span>
-                                    </v-flex>
-                                </v-layout>
-                            </v-container>
-                        </v-card>
-                    </v-flex>
-                </v-flex>
+          <v-flex xs12 md7>
+            <v-flex xs11 row wrap>
+              <v-flex
+                v-for="(method, index) in outlet.app_type"
+                :key="index"
+                @click="setupPaypoint(method)"
+              >
+                <v-card class="red thumbnail">
+                  <v-container fill-height fluid pa-2>
+                    <v-layout fill-height>
+                      <v-flex xs12 align-end flexbox>
+                        <span
+                          class="headline white--text"
+                          v-text="method.name"
+                        ></span>
+                      </v-flex>
+                    </v-layout>
+                  </v-container>
+                </v-card>
+              </v-flex>
             </v-flex>
+          </v-flex>
         </v-layout>
-
       </v-container>
     </v-content>
     <v-dialog v-model="failed" max-width="500px">
@@ -39,7 +37,7 @@
           {{ message }}
         </v-card-text>
         <v-card-actions align-right>
-          <v-btn color="primary" flat @click="failed = false">Close</v-btn>
+          <v-btn color="primary" @click="failed = false">Close</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -67,7 +65,7 @@ export default {
   data: () => ({
     drawer: null,
     paypoints: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-    hospital: { code: "", paypoint: 1, domain:'' },
+    hospital: { code: "", paypoint: 1, domain: "" },
     loadingDialog: false,
     failed: false,
     message: ""
@@ -95,39 +93,34 @@ export default {
       this.$router.push("/");
     },
     setupPaypoint: function(item) {
-      
       if (this.hospital.code != "") {
         this.loadingDialog = true;
         //console.log(this.outlet)
-        var postData={
+        var postData = {
           outlet: this.outlet,
-          app:item
-        }
-        //console.log(JSON.stringify(postData))
-        
-        axios
-          .post(this.domain + "/getType", postData)
-          .then(response => {
-            //return server response
-            if (response.data.status > 0) {
-                this.addOutlet(response.data.response.outlet);
-                this.addProduct(response.data.response.product);
-                this.addUsers(response.data.response.users, false);
-                this.outlet.app_type=item;
-                //console.log(this.outlet)
-                
-                this.message = response.data.message;
-                this.loadingDialog = false;
-                this.$router.push("/");
+          app: item
+        };
+        console.log(JSON.stringify(postData));
+        //return false;
+        this.post("/getType", postData)
+          .then(resp => {
+            if (resp.status > 0) {
+              this.addOutlet(resp.response.outlet);
+              this.addProduct(resp.response.product);
+              this.addUsers(resp.response.users, false);
+              this.outlet.app_type = item;
+              //console.log(this.outlet)
+
+              this.message = resp.message;
+              this.loadingDialog = false;
+              this.$router.push("/");
             } else {
               this.loadingDialog = false;
               this.failed = true;
-              this.message = response.data.message;
+              this.message = resp.message;
             }
-            //console.log(response)
           })
           .catch(e => {
-            console.log(e)
             this.message = "Error occured while trying to save Paypoint detail";
             this.loadingDialog = false;
             this.failed = true;
